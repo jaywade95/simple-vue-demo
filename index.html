@@ -22,7 +22,7 @@
     <div>
         <h1>My task {{ remaining }}</h1>
         <ul>
-            <li :class='{completed: task.completed}' v-for="task in list"  v-on:remove="deleteTask(task)">
+            <li :class='{completed: task.completed}' v-for="task in list"  v-on:remove="deleteTask(task)" @click="toggleTask(task)">
                 {{ task .body }}
                 <strong v-on:click="deleteTask(task)">X</strong>
             </li>
@@ -36,10 +36,12 @@
         props:['list'],
         methods: {
             toggleTask:function (task) {
-                task.completed = !task.completed;
+//                task.completed = !task.completed;
             },
             deleteTask:function (task) {
-                this.list.splice(task, 1);
+//                console.log(task)
+                var index = this.list.indexOf(task);
+                this.list.splice(index, 1);
             }
         },
         computed:{
@@ -56,7 +58,7 @@
             tasks:[
                 {body: '学习JavaScript', completed:false},
                 {body: '学习vuejs', completed:true},
-                {body: '学习大牛', completed:false}
+                {body: '学习test', completed:false}
             ]
         },
     })
